@@ -1,0 +1,36 @@
+
+# Base docker compose, added to by docker-compose.override
+
+version: '3'
+
+services:
+
+  # Nginx image
+  nginx:
+    image: nginx
+    expose:
+      - 80
+      - 443
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./resources/homeassistant/ha.secret.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: unless-stopped
+
+  # DuckDNS image
+  duckdns:
+    image: linuxserver/duckdns
+    restart: unless-stopped
+
+  ha:
+    # Home Assistant Image
+    image: homeassistant/home-assistant:${HA_VERSION}
+    expose:
+      - 8123
+    volumes:
+      - ${HOME}/HomeAssistantConfig:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /var/log/fail2ban.log:/var/log/fail2ban.log:ro
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+    restart: unless-stopped

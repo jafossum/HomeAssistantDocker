@@ -1,0 +1,6 @@
+# Docker enviroment variables.
+
+# DuckDNS
+SUBDOMAINS=SUBDOMAINS=<subdomains>
+TOKEN=<token> 
+TZ=<timezone>
