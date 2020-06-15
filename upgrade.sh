@@ -5,6 +5,9 @@ echo -n "Enter HomeAssistant version to use: "
 read ha_v
 export HA_VERSION=$ha_v
 
+# Stopping the running compose
+docker-compose down
+
 # Pull image
 echo "Pulling last image(s) for ${PWD}..."
 docker-compose pull
@@ -27,3 +30,4 @@ select yn in "Yes" "No"; do
 done
 
 echo "Upgrade done :)"
+
