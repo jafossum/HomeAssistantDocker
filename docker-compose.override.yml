@@ -13,3 +13,6 @@ services:
   # The reason for host mode is because of HA AutoDiscovery features
   ha:
     network_mode: "host"
+
+  zwave:
+    network_mode: "host"
